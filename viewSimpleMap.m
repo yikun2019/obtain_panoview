@@ -1,7 +1,7 @@
 clc,clear;
 
-srcModel = '';
-savePath = '';
+srcModel = '../roughTest/srcModel/';
+savePath = '../roughTest/simpleMap/';
 fileList = ls([srcModel, '*.off']);
 
 nfile = length(fileList);

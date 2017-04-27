@@ -100,7 +100,7 @@ assert(SameSize && size(orig,2)==3, ...
   'All input vectors have to be in Nx3 format.');
 
 %% Read user preferences
-eps        = 1e-5;    
+eps        = 1e-5;
 planeType  = 'two sided';
 lineType   = 'ray';
 border     = 'normal';

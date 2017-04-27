@@ -1,5 +1,5 @@
 function exMap = obtain_panoview(fileName)
-%tic
+tic
 [vertex,face] = read_off(fileName);
 vertex = vertex';
 face =face';
@@ -20,7 +20,7 @@ for jj = 1:size(meantri, 1)
     meantri(jj,:) = meantri(jj,:)*area(jj);
 end
 myCylinder.orig = sum(meantri,1)./sum(area);
-origMap = cylinderMap_New(myCylinder, vertex, face);
+origMap = cylinderMap(myCylinder, vertex, face);
 exMap = extendMap(origMap);
-%toc
+toc
 end
