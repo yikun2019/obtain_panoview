@@ -13,7 +13,7 @@ zmin = min(pointSet(:,3));
 [x,y,z] = cylinder(ones(nverdiv,1),nhordiv);
 x = x-mean(mean(x)*(mean(x(:))>10e-3));
 y = y-mean(mean(y)*(mean(y(:))>10e-3));
-maxz = max(max(z));   
+maxz = max(max(z));
 minz = min(min(z));
 z = (z-minz)*(zmax - zmin)/(maxz-minz)+zmin ;
 
