@@ -20,7 +20,7 @@ function map=cylinderMap_New(myCylinder, vertex, face)
     
     C = zeros(m,n);
 
-    tic
+    %tic
 	for i=1:tmp1
         if isempty(whole{i})==0
 		[tmp2,~]=size(whole{i});
@@ -41,7 +41,7 @@ function map=cylinderMap_New(myCylinder, vertex, face)
         end
         end
     end
-    toc
+    %toc
 	map = mat2gray(C);
 end
 
