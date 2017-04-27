@@ -18,43 +18,6 @@ function map=cylinderMap_New(myCylinder, vertex, face)
 
 	[tmp1,~]=size(whole);
     
-    pro=cell(m,n,3);
-    
-	for i=1:tmp1
-        if isempty(whole{i})==0
-		[tmp2,~]=size(whole{i});
-		for j=1:tmp2
-			x=whole{i}(j,1)+1;
-			y=whole{i}(j,2)+1;   
-            
-            pro{y,x,1}=[pro{y,x,1},max(max(myTri1(i,3),myTri2(i,3)),myTri3(i,3))];
-            pro{y,x,2}=[pro{y,x,2},min(min(myTri1(i,3),myTri2(i,3)),myTri3(i,3))];
-            pro{y,x,3}=[pro{y,x,3},i];
-			
-        end
-        end
-    end
-    
-    H=max(myTri1(:,3))/8;
-    
-	parfor i=1:tmp1
-        if isempty(whole{i})==0
-		[tmp2,~]=size(whole{i});
-		for j=1:tmp2
-			x=whole{i}(j,1)+1;
-			y=whole{i}(j,2)+1;   
-            
-            if max(max(myTri1(i,3),myTri2(i,3)),myTri3(i,3))<max(pro{y,x,2})-H;
-                whole{i}(j,1)=-100;
-                whole{i}(j,2)=-100;
-            end
-			
-        end
-        end
-    end
-    
-    
-    
     C = zeros(m,n);
 
     tic
@@ -62,19 +25,17 @@ function map=cylinderMap_New(myCylinder, vertex, face)
         if isempty(whole{i})==0
 		[tmp2,~]=size(whole{i});
 		for j=1:tmp2
-            if whole{i}(j,1)~=-100&&whole{i}(j,2)~=-100
-                x=whole{i}(j,1)+1;
-                y=whole{i}(j,2)+1;      
+			x=whole{i}(j,1)+1;
+			y=whole{i}(j,2)+1;      
 
-                direction = [X(y,x),Y(y,x),0];     % ray's direction
-                direction = direction/sqrt(sum((direction.^2)));
-                [intersect, t, ~,~,~] = TriangleRayIntersection (...
-                	[origX,origY,Z(y,x)], direction, vert1(i,:), vert2(i,:), vert3(i,:));
-                if sum(intersect) 
-                 	[CC,~] = max(t(intersect==1));
-                	if CC>=C(y,x)
-                		C(y,x) = CC;
-                    end
+			direction = [X(y,x),Y(y,x),0];     % ray's direction
+        	direction = direction/sqrt(sum((direction.^2)));
+       		[intersect, t, ~,~,~] = TriangleRayIntersection (...
+            	[origX,origY,Z(y,x)], direction, vert1(i,:), vert2(i,:), vert3(i,:));
+        	if sum(intersect) 
+            	[CC,~] = max(t(intersect==1));
+            	if CC>=C(y,x)
+            		C(y,x) = CC;
                 end
             end
         end
